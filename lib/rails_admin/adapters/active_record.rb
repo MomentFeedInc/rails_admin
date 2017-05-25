@@ -215,17 +215,21 @@ module RailsAdmin
           return if value.blank?
           value = case operator
           when 'default', 'like'
+            operator_query = like_operator
             "%#{value.downcase}%"
           when 'starts_with'
+            operator_query = like_operator
             "#{value.downcase}%"
           when 'ends_with'
+            operator_query = like_operator
             "%#{value.downcase}"
           when 'is', '='
+            operator_query = "="
             "#{value.downcase}"
           else
             return
           end
-          ["((#{column}) #{like_operator} ?)", value]
+          ["((#{column}) #{operator_query} ?)", value]
         when :date
           start_date, end_date = get_filtering_duration(operator, value)
 
