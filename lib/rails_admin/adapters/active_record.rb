@@ -225,7 +225,7 @@ module RailsAdmin
             "%#{value.downcase}"
           when 'is', '='
             operator_query = "="
-            "#{value.downcase}"
+            "#{value}"
           else
             return
           end
